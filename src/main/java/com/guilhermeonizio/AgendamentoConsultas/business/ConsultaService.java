@@ -30,7 +30,7 @@ public class ConsultaService {
     }
 
     // Buscar consulta
-    public Optional<Consulta> buscarConsulta(Long id) {
+    public Optional<Consulta> buscarConsultaPorId(Long id) {
         return consultaRepository.findById(id);
     }
 
@@ -40,12 +40,12 @@ public class ConsultaService {
     }
 
     // Listar consultas de um paciente
-    public List<Consulta> listarConsultasPorPaciente(Paciente paciente) {
-        return consultaRepository.findByPaciente(paciente);
+    public List<Consulta> listarConsultasPorPaciente(Long pacienteId) {
+        return consultaRepository.findByPacienteId(pacienteId);
     }
 
     // Listar consultas por médico e data
-    public List<Consulta> listarConsultasPorMedico(Long medicoId, LocalDateTime dataHora) {
+    public List<Consulta> listarConsultasPorEMedico(Long medicoId, LocalDateTime dataHora) {
         return consultaRepository.findByMedicoIdAndDataHora(medicoId, dataHora);
     }
 

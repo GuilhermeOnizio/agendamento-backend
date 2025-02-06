@@ -18,7 +18,7 @@ public class PacienteService {
         return pacienteRepository.save(paciente);
     }
 
-    public Optional<Paciente> buscarPaciente(Long id) {
+    public Optional<Paciente> buscarPacientePorId(Long id) {
         return pacienteRepository.findById(id);
     }
 

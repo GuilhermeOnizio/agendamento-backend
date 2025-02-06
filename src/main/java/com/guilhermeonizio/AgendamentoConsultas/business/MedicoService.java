@@ -18,7 +18,7 @@ public class MedicoService {
         return medicoRepository.save(medico);
     }
 
-    public Optional<Medico> buscarMedico(Long id) {
+    public Optional<Medico> buscarMedicoPorId(Long id) {
         return medicoRepository.findById(id);
     }
 
