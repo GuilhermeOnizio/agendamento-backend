@@ -45,7 +45,7 @@ public class ConsultaService {
     }
 
     // Listar consultas por médico e data
-    public List<Consulta> listarConsultasPorEMedico(Long medicoId, LocalDateTime dataHora) {
+    public List<Consulta> listarConsultasPorMedicoEData(Long medicoId, LocalDateTime dataHora) {
         return consultaRepository.findByMedicoIdAndDataHora(medicoId, dataHora);
     }
 
