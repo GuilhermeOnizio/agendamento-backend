@@ -1,5 +1,6 @@
 package com.guilhermeonizio.AgendamentoConsultas.business;
 
+import com.guilhermeonizio.AgendamentoConsultas.business.exception.EmailDuplicadoException;
 import com.guilhermeonizio.AgendamentoConsultas.domain.Medico;
 import com.guilhermeonizio.AgendamentoConsultas.persistence.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class MedicoService {
     private MedicoRepository medicoRepository;
 
     public Medico cadastrarMedico(Medico medico) {
+        if (medicoRepository.existsByEmail(medico.getEmail())) {
+            throw new EmailDuplicadoException("Já existe um médico cadastrado com este e-mail.");
+        }
         return medicoRepository.save(medico);
     }
 

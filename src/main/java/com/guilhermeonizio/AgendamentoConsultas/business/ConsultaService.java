@@ -1,7 +1,7 @@
 package com.guilhermeonizio.AgendamentoConsultas.business;
 
+import com.guilhermeonizio.AgendamentoConsultas.business.exception.ConsultaConflitoException;
 import com.guilhermeonizio.AgendamentoConsultas.domain.Consulta;
-import com.guilhermeonizio.AgendamentoConsultas.domain.Paciente;
 import com.guilhermeonizio.AgendamentoConsultas.persistence.ConsultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,16 @@ public class ConsultaService {
         if (consulta.getDataHora().isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("A data da consulta não pode ser no passado.");
         }
+
+        if (existeConsultaParaMedicoNoMesmoHorario(consulta.getMedico().getId(), consulta.getDataHora())) {
+            throw new ConsultaConflitoException("Já existe uma consulta agendada para este médico no mesmo horário.");
+        }
+
         return consultaRepository.save(consulta);
+    }
+
+    private boolean existeConsultaParaMedicoNoMesmoHorario(Long medicoId, LocalDateTime dataHora) {
+        return consultaRepository.existsByMedicoIdAndDataHora(medicoId, dataHora);
     }
 
     // Buscar consulta

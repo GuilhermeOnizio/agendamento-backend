@@ -17,4 +17,6 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
     // Busca consultas por médico e data
     @Query("SELECT c FROM Consulta c WHERE c.medico.id = :medicoId AND c.dataHora = :dataHora")
     List<Consulta> findByMedicoIdAndDataHora(@Param("medicoId") Long medicoId, @Param("dataHora") LocalDateTime dataHora);
+
+    boolean existsByMedicoIdAndDataHora(Long medicoId, LocalDateTime dataHora);
 }

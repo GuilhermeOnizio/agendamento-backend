@@ -1,9 +1,6 @@
 package com.guilhermeonizio.AgendamentoConsultas.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Paciente {
@@ -13,6 +10,8 @@ public class Paciente {
     private Long id;
 
     private String nome;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
     public Long getId() {
